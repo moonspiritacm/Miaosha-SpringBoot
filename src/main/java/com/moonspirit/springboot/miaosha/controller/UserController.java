@@ -1,6 +1,7 @@
 package com.moonspirit.springboot.miaosha.controller;
 
 import com.moonspirit.springboot.miaosha.controller.viewobject.UserVO;
+import com.moonspirit.springboot.miaosha.response.CommonReturnType;
 import com.moonspirit.springboot.miaosha.service.UserService;
 import com.moonspirit.springboot.miaosha.service.model.UserModel;
 import org.springframework.beans.BeanUtils;
@@ -24,9 +25,10 @@ public class UserController {
      */
     @RequestMapping("/get")
     @ResponseBody
-    public UserVO getUser(@RequestParam(name = "id") Integer id) {
+    public CommonReturnType getUser(@RequestParam(name = "id") Integer id) {
         UserModel userModel = userService.getUserById(id);
-        return convertFromModel(userModel);
+        UserVO userVO = convertFromModel(userModel);
+        return CommonReturnType.create(userVO);
     }
 
     private UserVO convertFromModel(UserModel userModel) {
