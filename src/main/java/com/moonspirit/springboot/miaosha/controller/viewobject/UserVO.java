@@ -1,13 +1,11 @@
-package com.moonspirit.springboot.miaosha.dataobject;
+package com.moonspirit.springboot.miaosha.controller.viewobject;
 
-public class UserInfoDO {
+public class UserVO {
     private Integer id;
     private String name;
     private Byte gender;
     private Integer age;
     private String telephone;
-    private String registerMod;
-    private String thirdPartyId;
 
     public Integer getId() {
         return id;
@@ -47,21 +45,5 @@ public class UserInfoDO {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public String getRegisterMod() {
-        return registerMod;
-    }
-
-    public void setRegisterMod(String registerMod) {
-        this.registerMod = registerMod;
-    }
-
-    public String getThirdPartyId() {
-        return thirdPartyId;
-    }
-
-    public void setThirdPartyId(String thirdPartyId) {
-        this.thirdPartyId = thirdPartyId;
     }
 }

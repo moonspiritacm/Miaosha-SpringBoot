@@ -25,7 +25,7 @@ public class Application {
         return "Hello World!";
     }
 
-    @RequestMapping("/user")
+    @RequestMapping("/username")
     public String getUserName() {
         UserInfoDO userInfoDO = userInfoDOMapper.selectByPrimaryKey(1);
         if (userInfoDO == null) {

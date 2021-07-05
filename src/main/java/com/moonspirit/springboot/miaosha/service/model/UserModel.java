@@ -1,6 +1,6 @@
-package com.moonspirit.springboot.miaosha.dataobject;
+package com.moonspirit.springboot.miaosha.service.model;
 
-public class UserInfoDO {
+public class UserModel {
     private Integer id;
     private String name;
     private Byte gender;
@@ -8,6 +8,7 @@ public class UserInfoDO {
     private String telephone;
     private String registerMod;
     private String thirdPartyId;
+    private String encrptPassword;
 
     public Integer getId() {
         return id;
@@ -63,5 +64,13 @@ public class UserInfoDO {
 
     public void setThirdPartyId(String thirdPartyId) {
         this.thirdPartyId = thirdPartyId;
+    }
+
+    public String getEncrptPassword() {
+        return encrptPassword;
+    }
+
+    public void setEncrptPassword(String encrptPassword) {
+        this.encrptPassword = encrptPassword;
     }
 }
