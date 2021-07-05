@@ -1,4 +1,4 @@
-package com.moonspirit.springboot;
+package com.moonspirit.springboot.miaosha;
 
 import static org.junit.Assert.assertTrue;
 
