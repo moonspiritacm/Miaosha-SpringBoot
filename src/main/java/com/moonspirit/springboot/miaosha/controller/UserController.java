@@ -1,6 +1,8 @@
 package com.moonspirit.springboot.miaosha.controller;
 
 import com.moonspirit.springboot.miaosha.controller.viewobject.UserVO;
+import com.moonspirit.springboot.miaosha.error.BusinessException;
+import com.moonspirit.springboot.miaosha.error.EnumBusinessError;
 import com.moonspirit.springboot.miaosha.response.CommonReturnType;
 import com.moonspirit.springboot.miaosha.service.UserService;
 import com.moonspirit.springboot.miaosha.service.model.UserModel;
@@ -25,8 +27,13 @@ public class UserController {
      */
     @RequestMapping("/get")
     @ResponseBody
-    public CommonReturnType getUser(@RequestParam(name = "id") Integer id) {
+    public CommonReturnType getUser(@RequestParam(name = "id") Integer id) throws BusinessException {
         UserModel userModel = userService.getUserById(id);
+
+        if(userModel == null) {
+            throw new BusinessException(EnumBusinessError.USER_NOT_EXIST);
+        }
+
         UserVO userVO = convertFromModel(userModel);
         return CommonReturnType.create(userVO);
     }
