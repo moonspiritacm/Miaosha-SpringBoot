@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller("user")
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -30,7 +30,8 @@ public class UserController {
     public CommonReturnType getUser(@RequestParam(name = "id") Integer id) throws BusinessException {
         UserModel userModel = userService.getUserById(id);
 
-        if(userModel == null) {
+        if (userModel == null) {
+            // userModel.setId(1);
             throw new BusinessException(EnumBusinessError.USER_NOT_EXIST);
         }
 

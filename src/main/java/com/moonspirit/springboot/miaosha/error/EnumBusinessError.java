@@ -1,11 +1,12 @@
 package com.moonspirit.springboot.miaosha.error;
 
 public enum EnumBusinessError implements CommonError {
-    // 000XX - 通用错误码
-    PAPAMETER_VALIDATION_ERROR(00001, "参数不合法"),
+    // 100XX - 通用错误码
+    UNKNOWN_ERROR(10000, "未知错误"),
+    PAPAMETER_VALIDATION_ERROR(10001, "参数不合法"),
 
-    // 100XX - 用户信息错误码
-    USER_NOT_EXIST(10001, "用户不存在"),
+    // 200XX - 用户信息错误码
+    USER_NOT_EXIST(20001, "用户不存在"),
 
     ;
 
@@ -18,12 +19,12 @@ public enum EnumBusinessError implements CommonError {
     }
 
     @Override
-    public int getErrorCode() {
+    public int getErrCode() {
         return this.errCode;
     }
 
     @Override
-    public String getErrorMsg() {
+    public String getErrMsg() {
         return this.errMsg;
     }
 
@@ -34,7 +35,7 @@ public enum EnumBusinessError implements CommonError {
      * @return
      */
     @Override
-    public CommonError setErrorMsg(String errorMsg) {
+    public CommonError setErrMsg(String errorMsg) {
         this.errMsg = errMsg;
         return this;
     }
