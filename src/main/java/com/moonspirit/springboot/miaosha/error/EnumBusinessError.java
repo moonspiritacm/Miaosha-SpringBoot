@@ -5,8 +5,11 @@ public enum EnumBusinessError implements CommonError {
     UNKNOWN_ERROR(10000, "未知错误"),
     PAPAMETER_VALIDATION_ERROR(10001, "参数不合法"),
 
-    // 200XX - 用户信息错误码
-    USER_NOT_EXIST(20001, "用户不存在"),
+    // 200XX - 系统错误码
+    SMS_SEND_ERROR(20001, "短信验证码发送失败"),
+
+    // 300XX - 用户信息错误码
+    USER_NOT_EXIST(30001, "用户不存在"),
 
     ;
 
