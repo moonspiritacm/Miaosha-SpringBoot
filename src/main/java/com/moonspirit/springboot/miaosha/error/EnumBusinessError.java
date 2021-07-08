@@ -7,6 +7,7 @@ public enum EnumBusinessError implements CommonError {
 
     // 200XX - 系统错误码
     SMS_SEND_ERROR(20001, "短信验证码发送失败"),
+    SMS_ENCODE_ERROR(20002, "明文加密失败"),
 
     // 300XX - 用户信息错误码
     USER_NOT_EXIST(30001, "用户不存在"),
@@ -34,11 +35,11 @@ public enum EnumBusinessError implements CommonError {
     /**
      * 针对通用错误类型，自定义错误消息。常用于入参校验
      *
-     * @param errorMsg
+     * @param errMsg
      * @return
      */
     @Override
-    public CommonError setErrMsg(String errorMsg) {
+    public CommonError setErrMsg(String errMsg) {
         this.errMsg = errMsg;
         return this;
     }

@@ -1,5 +1,6 @@
 package com.moonspirit.springboot.miaosha.service;
 
+import com.moonspirit.springboot.miaosha.error.BusinessException;
 import com.moonspirit.springboot.miaosha.service.model.UserModel;
 
 public interface UserService {
@@ -10,4 +11,6 @@ public interface UserService {
      * @return
      */
     UserModel getUserById(Integer id);
+
+    void register(UserModel userModel) throws BusinessException;
 }

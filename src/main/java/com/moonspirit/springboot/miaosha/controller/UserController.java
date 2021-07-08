@@ -6,6 +6,7 @@ import com.moonspirit.springboot.miaosha.error.EnumBusinessError;
 import com.moonspirit.springboot.miaosha.response.CommonReturnType;
 import com.moonspirit.springboot.miaosha.service.UserService;
 import com.moonspirit.springboot.miaosha.service.model.UserModel;
+import com.moonspirit.springboot.miaosha.util.MD5Util;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,49 @@ public class UserController extends BaseController {
 
         UserVO userVO = convertFromModel(userModel);
         return CommonReturnType.create(userVO);
+    }
+
+    /**
+     * 用户注册接口
+     *
+     * @param telephone
+     * @param otpCode
+     * @param name
+     * @param gender
+     * @param age
+     * @return
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = CONTENT_TYPE_FORMED)
+    @ResponseBody
+    public CommonReturnType register(@RequestParam(name = "telephone") String telephone,
+                                     @RequestParam(name = "otpCode") String otpCode,
+                                     @RequestParam(name = "name") String name,
+                                     @RequestParam(name = "gender") Integer gender,
+                                     @RequestParam(name = "age") Integer age,
+                                     @RequestParam(name = "password") String password) throws BusinessException {
+        // 验证码
+        String otpCodeSession = (String) httpServletRequest.getSession().getAttribute(telephone);
+        System.out.println(otpCodeSession);
+        /*
+        if (!otpCode.equals(otpCodeSession)) {
+            throw new BusinessException(EnumBusinessError.PAPAMETER_VALIDATION_ERROR, "验证码无效");
+        }
+        */
+
+        // 用户注册
+        UserModel userModel = new UserModel();
+        userModel.setName(name);
+        userModel.setGender(new Byte(String.valueOf(gender.intValue())));
+        userModel.setTelephone(telephone);
+        userModel.setAge(age);
+        userModel.setRegisterMod("telephone");
+        try {
+            userModel.setEncrptPassword(MD5Util.Encoder(password));
+        } catch (Exception e) {
+            throw new BusinessException(EnumBusinessError.SMS_ENCODE_ERROR);
+        }
+        userService.register(userModel);
+        return CommonReturnType.create(null);
     }
 
     /**
