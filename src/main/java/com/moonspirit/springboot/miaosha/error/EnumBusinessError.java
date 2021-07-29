@@ -11,6 +11,7 @@ public enum EnumBusinessError implements CommonError {
 
     // 300XX - 用户信息错误码
     USER_NOT_EXIST(30001, "用户不存在"),
+    USER_LOGIN_FAIL(30002, "用户手机号或密码不正确"),
 
     ;
 

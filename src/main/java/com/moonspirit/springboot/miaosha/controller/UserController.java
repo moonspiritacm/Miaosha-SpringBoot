@@ -79,12 +79,17 @@ public class UserController extends BaseController {
         userModel.setTelephone(telephone);
         userModel.setAge(age);
         userModel.setRegisterMod("telephone");
-        try {
-            userModel.setEncrptPassword(MD5Util.Encoder(password));
-        } catch (Exception e) {
-            throw new BusinessException(EnumBusinessError.SMS_ENCODE_ERROR);
-        }
+        userModel.setEncrptPassword(MD5Util.Encoder(password));
         userService.register(userModel);
+        return CommonReturnType.create(null);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = CONTENT_TYPE_FORMED)
+    @ResponseBody
+    public CommonReturnType login(@RequestParam(name = "telephone") String telephone, @RequestParam(name = "password") String password) throws BusinessException {
+        UserModel userModel = userService.validateLogin(telephone, MD5Util.Encoder(password));
+        httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
+        httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
         return CommonReturnType.create(null);
     }
 
